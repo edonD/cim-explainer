@@ -181,15 +181,112 @@ export default function Chapter8() {
           </div>
         </ScrollReveal>
 
+        {/* Transistor Budget */}
         <ScrollReveal delay={0.3}>
+          <div className="max-w-3xl mx-auto mt-12">
+            <h3 className="text-lg font-bold text-[#00f0ff] text-center mb-4 mono">
+              Transistor Budget
+            </h3>
+            <div className="bg-[#0d1526] rounded-xl p-5 neon-border">
+              <table className="w-full text-sm">
+                <thead>
+                  <tr className="text-[#94a3b8] mono text-xs border-b border-white/5">
+                    <th className="text-left py-2">Block</th>
+                    <th className="text-right py-2">Count</th>
+                    <th className="text-right py-2">Per Unit</th>
+                    <th className="text-right py-2">Total</th>
+                  </tr>
+                </thead>
+                <tbody className="mono">
+                  <tr className="border-b border-white/5">
+                    <td className="py-2 text-[#10b981]">SRAM Array (64×64)</td>
+                    <td className="text-right text-[#94a3b8]">4,096</td>
+                    <td className="text-right text-[#94a3b8]">8T</td>
+                    <td className="text-right text-white font-bold">32,768</td>
+                  </tr>
+                  <tr className="border-b border-white/5">
+                    <td className="py-2 text-[#a855f7]">PWM Drivers</td>
+                    <td className="text-right text-[#94a3b8]">64</td>
+                    <td className="text-right text-[#94a3b8]">{PWM.transistor_count}T</td>
+                    <td className="text-right text-white font-bold">{64 * PWM.transistor_count}</td>
+                  </tr>
+                  <tr className="border-b border-white/5">
+                    <td className="py-2 text-[#f59e0b]">SAR ADCs</td>
+                    <td className="text-right text-[#94a3b8]">64</td>
+                    <td className="text-right text-[#94a3b8]">~50T</td>
+                    <td className="text-right text-white font-bold">~3,200</td>
+                  </tr>
+                  <tr className="border-b border-white/5">
+                    <td className="py-2 text-[#00f0ff]">Precharge PMOS</td>
+                    <td className="text-right text-[#94a3b8]">64</td>
+                    <td className="text-right text-[#94a3b8]">1T</td>
+                    <td className="text-right text-white font-bold">64</td>
+                  </tr>
+                  <tr className="border-b border-white/5">
+                    <td className="py-2 text-[#94a3b8]">Control Logic</td>
+                    <td className="text-right text-[#94a3b8]">1</td>
+                    <td className="text-right text-[#94a3b8]">~200T</td>
+                    <td className="text-right text-white font-bold">~200</td>
+                  </tr>
+                  <tr className="font-bold">
+                    <td className="py-2 text-[#00f0ff]">TOTAL</td>
+                    <td className="text-right" />
+                    <td className="text-right" />
+                    <td className="text-right text-[#00f0ff]">~36,616</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </ScrollReveal>
+
+        {/* Timing Budget */}
+        <ScrollReveal delay={0.4}>
+          <div className="max-w-3xl mx-auto mt-8">
+            <h3 className="text-lg font-bold text-[#f59e0b] text-center mb-4 mono">
+              Timing Budget (One Compute Cycle)
+            </h3>
+            <div className="bg-[#0d1526] rounded-xl p-5 neon-border">
+              {[
+                { phase: "Precharge", time: "~5 ns", pct: 2, color: "#ef4444" },
+                { phase: "Compute (PWM)", time: "≤75 ns", pct: 25, color: "#a855f7" },
+                { phase: "Settle", time: "~20 ns", pct: 7, color: "#10b981" },
+                { phase: "ADC Convert", time: `${ADC.conversion_time_ns} ns`, pct: 36, color: "#f59e0b" },
+                { phase: "Read/Output", time: "~10 ns", pct: 3, color: "#00f0ff" },
+              ].map((item, i) => (
+                <div key={i} className="mb-3">
+                  <div className="flex justify-between text-xs mb-1">
+                    <span style={{ color: item.color }} className="mono">{item.phase}</span>
+                    <span className="mono text-[#94a3b8]">{item.time}</span>
+                  </div>
+                  <div className="h-3 bg-[#1e293b] rounded-full overflow-hidden">
+                    <motion.div
+                      className="h-full rounded-full"
+                      style={{
+                        background: item.color,
+                        boxShadow: `0 0 8px ${item.color}44`,
+                      }}
+                      initial={{ width: 0 }}
+                      whileInView={{ width: `${item.pct}%` }}
+                      viewport={{ once: true }}
+                      transition={{ duration: 0.8, delay: i * 0.1 }}
+                    />
+                  </div>
+                </div>
+              ))}
+              <div className="text-center mono text-xs text-[#94a3b8] mt-3">
+                Total: ~{5 + 75 + 20 + ADC.conversion_time_ns + 10} ns → {(1e9 / (5 + 75 + 20 + ADC.conversion_time_ns + 10) / 1e6).toFixed(1)} MHz compute rate
+              </div>
+            </div>
+          </div>
+        </ScrollReveal>
+
+        <ScrollReveal delay={0.5}>
           <GlowCard color="#00f0ff" className="max-w-3xl mx-auto mt-8">
             <p className="text-center text-lg text-[#94a3b8]">
-              This entire tile does what would take a GPU millions of transistors —
-              with a <span className="text-[#10b981] font-bold">fraction of the power</span>.
-              The array alone: {CHIP.array_rows * CHIP.array_cols} cells ×{" "}
-              8 transistors = <span className="mono text-[#00f0ff]">
-              {(CHIP.array_rows * CHIP.array_cols * 8).toLocaleString()} transistors
-              </span> for {(CHIP.array_rows * CHIP.array_cols).toLocaleString()} simultaneous MACs.
+              ~36,600 transistors performing {(CHIP.array_rows * CHIP.array_cols).toLocaleString()} simultaneous MACs —
+              that&apos;s <span className="text-[#10b981] font-bold">112 MACs per transistor</span>.
+              A GPU needs ~1,000 transistors per MAC unit.
             </p>
           </GlowCard>
         </ScrollReveal>
