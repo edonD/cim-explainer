@@ -6,6 +6,7 @@ import ChapterHeader from "../ui/ChapterHeader";
 import ScrollReveal from "../ui/ScrollReveal";
 import GlowCard from "../ui/GlowCard";
 import { CHIP, ADC, PWM, BITCELL, ARRAY } from "../chipData";
+import DataFlowDiagram from "../anim/DataFlowDiagram";
 
 function ChipExplodedView() {
   const ref = useRef<HTMLDivElement>(null);
@@ -143,6 +144,13 @@ export default function Chapter8() {
         </ScrollReveal>
 
         <ChipExplodedView />
+
+        <ScrollReveal delay={0.15}>
+          <h3 className="text-lg font-bold text-center text-[#94a3b8] mt-8 mb-2">
+            Signal Path Through One Column
+          </h3>
+          <DataFlowDiagram />
+        </ScrollReveal>
 
         <ScrollReveal delay={0.2}>
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4 max-w-4xl mx-auto mt-8">
