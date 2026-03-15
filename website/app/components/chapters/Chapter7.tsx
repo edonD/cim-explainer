@@ -6,6 +6,7 @@ import ChapterHeader from "../ui/ChapterHeader";
 import ScrollReveal from "../ui/ScrollReveal";
 import GlowCard from "../ui/GlowCard";
 import { BITCELL, ADC, CHIP } from "../chipData";
+import ArchComparison from "../anim/ArchComparison";
 
 // Simple MNIST-style digit (7x7 pixel grid)
 const DIGIT_7 = [
@@ -259,6 +260,8 @@ export default function Chapter7() {
         </ScrollReveal>
 
         <InferencePipeline />
+
+        <ArchComparison />
 
         <ScrollReveal delay={0.2}>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-4xl mx-auto mt-12">
