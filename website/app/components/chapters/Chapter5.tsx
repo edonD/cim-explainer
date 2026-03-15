@@ -5,6 +5,7 @@ import { useRef, useState, useEffect, useMemo } from "react";
 import ChapterHeader from "../ui/ChapterHeader";
 import ScrollReveal from "../ui/ScrollReveal";
 import GlowCard from "../ui/GlowCard";
+import TimingDiagram from "../anim/TimingDiagram";
 import { BITCELL, CHIP } from "../chipData";
 
 type ArraySize = 1 | 4 | 8 | 64;
@@ -278,6 +279,51 @@ export default function Chapter5() {
         </ScrollReveal>
 
         <CIMArray />
+
+        <ScrollReveal delay={0.1}>
+          <TimingDiagram
+            title="One Compute Cycle — Signal Timing"
+            signals={[
+              {
+                name: "rst",
+                color: "#ef4444",
+                type: "digital",
+                waveform: [1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+              },
+              {
+                name: "wl[i]",
+                color: "#a855f7",
+                type: "digital",
+                waveform: [0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0],
+              },
+              {
+                name: "bl[j]",
+                color: "#10b981",
+                type: "analog",
+                waveform: [0.5, 0.8, 1, 1, 1, 0.95, 0.88, 0.8, 0.72, 0.65, 0.6, 0.55, 0.52, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5],
+              },
+              {
+                name: "ADC",
+                color: "#f59e0b",
+                type: "digital",
+                waveform: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 0],
+              },
+              {
+                name: "d_out",
+                color: "#00f0ff",
+                type: "digital",
+                waveform: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1],
+              },
+            ]}
+            timeLabels={["0", "5ns", "80ns", "100ns", "208ns", "300ns"]}
+            phaseLabels={[
+              { start: 0, end: 3, label: "PRE", color: "#ef4444" },
+              { start: 3, end: 12, label: "COMPUTE", color: "#a855f7" },
+              { start: 12, end: 14, label: "SETTLE", color: "#10b981" },
+              { start: 14, end: 19, label: "ADC CONVERT", color: "#f59e0b" },
+            ]}
+          />
+        </ScrollReveal>
 
         <ScrollReveal delay={0.2}>
           <GlowCard color="#10b981" className="max-w-3xl mx-auto">
