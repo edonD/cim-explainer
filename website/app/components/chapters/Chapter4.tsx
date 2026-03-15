@@ -133,11 +133,11 @@ function PWMWaveforms() {
           <text x={60 + maxWidth} y="330" fill="#94a3b8" fontSize="8" fontFamily="monospace" textAnchor="middle">{PWM.max_pulse_ns.toFixed(0)}ns</text>
 
           {/* Annotations */}
-          <text x={60 + maxWidth + 50} y="20" fill="#94a3b8" fontSize="9" fontFamily="monospace">
-            code=0: no pulse
+          <text x={60 + maxWidth + 20} y="20" fill="#94a3b8" fontSize="9" fontFamily="monospace">
+            no pulse
           </text>
-          <text x={60 + maxWidth + 50} y="330" fill="#94a3b8" fontSize="9" fontFamily="monospace">
-            code=15: max
+          <text x={60 + maxWidth + 20} y="325" fill="#94a3b8" fontSize="9" fontFamily="monospace">
+            max pulse
           </text>
         </svg>
 

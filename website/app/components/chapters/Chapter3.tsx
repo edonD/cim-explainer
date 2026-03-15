@@ -25,7 +25,7 @@ function TransistorDiagram() {
 
           {/* VDD rail */}
           <line x1="80" y1="50" x2="320" y2="50" stroke="#ef4444" strokeWidth="2" />
-          <text x="330" y="54" fill="#ef4444" fontSize="10" fontFamily="monospace">VDD = 1.8V</text>
+          <text x="200" y="42" fill="#ef4444" fontSize="10" fontFamily="monospace" textAnchor="middle">VDD = 1.8V</text>
 
           {/* VSS rail */}
           <line x1="80" y1="250" x2="420" y2="250" stroke="#475569" strokeWidth="2" />
@@ -86,7 +86,7 @@ function TransistorDiagram() {
 
           {/* BL connection */}
           <line x1="375" y1="50" x2="375" y2="120" stroke={currentFlows ? "#00f0ff" : "#475569"} strokeWidth="2" />
-          <text x="390" y="54" fill="#00f0ff" fontSize="10" fontFamily="monospace">BL</text>
+          <text x="392" y="64" fill="#00f0ff" fontSize="10" fontFamily="monospace">BL</text>
 
           {/* Mid node */}
           <line x1="375" y1="148" x2="375" y2="200" stroke={currentFlows ? "#10b981" : "#475569"} strokeWidth="1.5" />
