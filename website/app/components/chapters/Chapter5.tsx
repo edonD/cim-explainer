@@ -364,6 +364,26 @@ export default function Chapter5() {
             64 multiply-accumulate operations. One cycle.{" "}
             <span className="text-[#00f0ff] text-glow-cyan">Zero data movement.</span>
           </motion.p>
+          <div className="mt-6 flex justify-center gap-8 flex-wrap">
+            <div className="text-center">
+              <div className="mono text-lg text-[#f59e0b]">
+                {((4096 / 300) * 1000).toFixed(0)} GOPS
+              </div>
+              <div className="text-[10px] text-[#475569]">peak throughput</div>
+            </div>
+            <div className="text-center">
+              <div className="mono text-lg text-[#a855f7]">
+                {BITCELL.energy_per_mac_pj} pJ/MAC
+              </div>
+              <div className="text-[10px] text-[#475569]">energy efficiency</div>
+            </div>
+            <div className="text-center">
+              <div className="mono text-lg text-[#00f0ff]">
+                ~300 ns
+              </div>
+              <div className="text-[10px] text-[#475569]">per 64×64 MVM</div>
+            </div>
+          </div>
         </ScrollReveal>
       </div>
     </section>
