@@ -206,3 +206,46 @@ LOOP FOREVER:
 7. Repeat
 
 **NEVER STOP.** If all chapters are built, add more interactivity, more animations, more detail. Make it the best CIM explainer that has ever existed. The human is away. When they come back, they should understand CIM deeply and be blown away by the presentation.
+
+## URGENT ADDITION: Deep SRAM Simulation
+
+Chapter 3 needs to be MUCH deeper. The current transistor diagram is too static. Add the following:
+
+### 3a: How SRAM Stores a Bit (Animated Simulation)
+- Show the cross-coupled inverter pair step by step:
+  1. Two NOT gates feeding back into each other
+  2. Animate: if Q is high, it forces QB low through the right inverter, which forces Q high through the left inverter — the feedback loop that HOLDS data
+  3. Show the voltage waveforms at Q and QB stabilizing (like an oscilloscope trace)
+  4. Show what happens when you TRY to flip it — the cell resists (that is stability / SNM)
+  5. Then show how the access transistors (controlled by wordline) allow WRITING by overpowering the feedback
+
+### 3b: Write Operation Animation
+- Step-by-step animated simulation:
+  1. Cell stores Q=0 initially (show voltages)
+  2. Bitlines BL=VDD, BLB=0 driven externally (show the strong drivers)
+  3. Wordline goes HIGH — access transistors turn ON
+  4. The external drivers overpower the cross-coupled inverters
+  5. Q flips to 1, QB flips to 0
+  6. Wordline goes LOW — cell now holds the new value
+  7. Show voltage waveforms throughout (animated line chart, like SPICE output)
+
+### 3c: Read Operation vs CIM Compute
+- Compare traditional SRAM read (charge sharing on bitline) vs CIM compute (current-mode readout)
+- Show why the 8T cell is better than 6T for CIM — decoupled read port does not disturb stored data
+
+### 3d: Stability Visualization
+- Butterfly curve animation: plot Q vs QB transfer characteristics
+- Show the two stable states as the "eyes" of the butterfly
+- SNM = the largest square that fits inside = 557 mV (from real measurements)
+- Animate what happens when noise pushes the operating point — it snaps back to stable state
+
+### 3e: General SRAM Knowledge Section
+- What is SRAM vs DRAM vs Flash — comparison table with animations
+- Why SRAM is fast (no refresh needed, no charge pump)
+- Where SRAM lives in a processor (L1/L2/L3 cache hierarchy) — animated diagram
+- The 6T cell topology and WHY cross-coupling creates bistability
+- Scaling: how many SRAM cells fit on modern chips (billions)
+
+Make these sub-sections scroll-triggered with smooth animations. Use animated SVG waveforms, canvas-based voltage traces, and interactive elements where the user can toggle wordline/bitlines to see what happens. This should feel like an interactive circuit simulator, not a static diagram.
+
+Commit and push after EACH sub-section is implemented.
