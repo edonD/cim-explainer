@@ -5,6 +5,7 @@ import { useRef, useState, useEffect, useCallback } from "react";
 import ChapterHeader from "../ui/ChapterHeader";
 import ScrollReveal from "../ui/ScrollReveal";
 import GlowCard from "../ui/GlowCard";
+import DotProductGrid from "../anim/DotProductGrid";
 
 function OhmsLawDemo() {
   const ref = useRef<HTMLDivElement>(null);
@@ -289,6 +290,17 @@ export default function Chapter2() {
         </ScrollReveal>
 
         <KirchhoffDemo />
+
+        <ScrollReveal delay={0.1}>
+          <h3 className="text-2xl font-bold text-center text-[#00f0ff] mb-2 mt-16">
+            Put It Together: Matrix-Vector Multiply
+          </h3>
+          <p className="text-center text-[#94a3b8] mb-4">
+            A grid of binary weights × input activations = dot products. All in one shot.
+          </p>
+        </ScrollReveal>
+
+        <DotProductGrid />
 
         <ScrollReveal delay={0.2}>
           <motion.p
