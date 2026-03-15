@@ -13,6 +13,7 @@ const chapters = [
   { id: "chapter-7", num: 7, title: "Inference", color: "#00f0ff" },
   { id: "chapter-8", num: 8, title: "Full Chip", color: "#00f0ff" },
   { id: "chapter-9", num: 9, title: "Why It Matters", color: "#10b981" },
+  { id: "chapter-10", num: 10, title: "CIM Is Real", color: "#00f0ff" },
 ];
 
 export default function ChapterNav() {

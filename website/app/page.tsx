@@ -10,6 +10,7 @@ import Chapter6 from "./components/chapters/Chapter6";
 import Chapter7 from "./components/chapters/Chapter7";
 import Chapter8 from "./components/chapters/Chapter8";
 import Chapter9 from "./components/chapters/Chapter9";
+import Chapter10 from "./components/chapters/Chapter10";
 import ChapterNav from "./components/ChapterNav";
 import ScrollProgress from "./components/ScrollProgress";
 
@@ -55,6 +56,10 @@ export default function Home() {
       <div className="h-px bg-gradient-to-r from-transparent via-[#10b981]/20 to-transparent" />
 
       <Chapter9 />
+
+      <div className="h-px bg-gradient-to-r from-transparent via-[#00f0ff]/20 to-transparent" />
+
+      <Chapter10 />
     </main>
   );
 }
