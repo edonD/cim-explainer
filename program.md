@@ -249,3 +249,89 @@ Chapter 3 needs to be MUCH deeper. The current transistor diagram is too static.
 Make these sub-sections scroll-triggered with smooth animations. Use animated SVG waveforms, canvas-based voltage traces, and interactive elements where the user can toggle wordline/bitlines to see what happens. This should feel like an interactive circuit simulator, not a static diagram.
 
 Commit and push after EACH sub-section is implemented.
+
+## URGENT ADDITION: Research-Backed Demos — Make It Believable
+
+The explainer currently explains the concepts but does not PROVE them with real research. Nobody will believe this works unless you show the papers, the results, and the context. Use the BUAA CIM literature collection as your source: https://github.com/BUAA-CI-LAB/Literatures-on-SRAM-based-CIM
+
+### New Chapter: "CIM Is Not Theory — It Is Shipping"
+
+Add a new chapter (or expand Chapter 8/9) that shows the REAL state of the art. For each key paper/chip, create a visual demo card that includes:
+
+1. **Search for each paper** using web search to find the actual results, figures, architecture diagrams, and key metrics
+2. **Recreate the key diagrams** as clean SVG/Canvas visualizations — NOT screenshots, but YOUR OWN recreations showing the architecture
+3. **Show the performance numbers** in compelling data visualizations
+
+### Papers to Research and Visualize (search for each one)
+
+**Macro Level (Circuit Designs):**
+- "22nm 109-250 TFLOPS/W Outlier-Aware FP SRAM CIM" (JSSC 2025) — show how they handle floating-point in SRAM
+- "51.6 TFLOPS/W Full-Datapath CIM Approaching Sparsity Bound" (ISSCC 2025) — show sparsity exploitation
+- "192.3 TFLOPS/W Dual-Mode-Transpose Digital 6T-SRAM CIM" (ISSCC 2025) — training AND inference in CIM
+- "28nm 64kb Bit-Rotated Hybrid-CIM Macro" (ISSCC 2025) — hybrid analog/digital approach
+
+**Architecture Level (Full Systems):**
+- "Mixed-precision memristor and SRAM CIM AI processor" (Nature 2025) — a Nature paper means serious validation
+- "Efficient Edge Vision Transformer Accelerator with CIM" (DAC 2025) — CIM running transformers, not just CNNs
+
+**Commercial:**
+- d-Matrix Corsair chip — 1GB SRAM, 100B parameter models, $275M raised
+- Search for their architecture and recreate a simplified version
+
+### How to Present Each Paper
+
+For each paper/chip, create a visual card with:
+
+```
+┌─────────────────────────────────────────────────┐
+│  [ISSCC 2025]  22nm Outlier-Aware FP CIM        │
+│  ─────────────────────────────────────────────── │
+│                                                   │
+│  [Recreated architecture diagram as SVG]          │
+│  Show: the macro layout, data flow, key blocks    │
+│                                                   │
+│  ┌──────────┐  ┌──────────┐  ┌──────────┐       │
+│  │ 250      │  │ 22nm     │  │ FP16     │       │
+│  │ TFLOPS/W │  │ TSMC     │  │ Support  │       │
+│  └──────────┘  └──────────┘  └──────────┘       │
+│                                                   │
+│  Key Innovation: Handles outlier activations in   │
+│  LLMs by splitting computation into normal and    │
+│  outlier paths — solves the main accuracy problem │
+│  that prevented CIM from running real LLMs.       │
+│                                                   │
+│  [Link to paper]                                  │
+└─────────────────────────────────────────────────┘
+```
+
+### Timeline Visualization
+
+Create an animated timeline showing CIM evolution:
+- 2018: First SRAM CIM demos (~1 TOPS/W, MNIST only)
+- 2019-2020: Multi-bit precision, CNNs
+- 2021-2022: Digital CIM macros, better accuracy
+- 2023: Transformer support, hybrid architectures
+- 2024: Floating-point CIM, LLM-capable designs
+- 2025: 250 TFLOPS/W, commercial chips (d-Matrix), Nature papers
+- 2026: 3D stacked CIM, on-chip LLM inference
+
+Show where OUR chip sits on this timeline — "We are building on the same architecture that achieved 250 TFLOPS/W at 22nm. Our SKY130 prototype proves the concept at 130nm."
+
+### Comparison Dashboard
+
+Create an interactive comparison table:
+| Metric | Our SKY130 | ISSCC 2025 Best | d-Matrix | Traditional GPU |
+|--------|-----------|-----------------|----------|-----------------|
+| Node | 130nm | 22nm | Advanced | 4nm |
+| Energy Efficiency | X TOPS/W | 250 TFLOPS/W | 10x over HBM | ~1 TFLOPS/W |
+| Array Size | 64x64 | 256x256 | 1GB SRAM | N/A |
+| Target | Edge AI | Edge+Cloud | Cloud inference | Everything |
+| Power | <10mW | ~mW range | Watts | 300W+ |
+
+### The Credibility Argument
+
+The narrative must be: "This is not a science project. This is a proven technology class that has Nature papers, ISSCC papers, and $275M in VC funding. We are building a prototype on SKY130 that demonstrates the same fundamental principles. The path to a commercial product is a node shrink and precision upgrade — both well-understood engineering problems."
+
+Search the web for EVERY paper mentioned above. Read the abstracts. Find the key figures and metrics. Recreate the architectures as clean diagrams. Make this chapter the most research-dense, credibility-building section of the entire explainer.
+
+Commit and push after EACH paper visualization is added.
