@@ -269,6 +269,37 @@ export default function Chapter3() {
             </div>
           </GlowCard>
         </ScrollReveal>
+
+        {/* Real SPICE netlist */}
+        <ScrollReveal delay={0.4}>
+          <div className="max-w-2xl mx-auto mt-8">
+            <div className="mono text-xs text-center text-[#475569] mb-2">
+              From the actual SPICE netlist (SKY130 PDK)
+            </div>
+            <div className="bg-[#080c16] rounded-xl p-4 border border-[#1e293b] overflow-x-auto">
+              <pre className="mono text-[11px] leading-relaxed">
+                <span className="text-[#475569]">{`* 6T Storage Core`}</span>{"\n"}
+                <span className="text-[#ef4444]">XMPL</span>{" "}
+                <span className="text-[#94a3b8]">q qb vdd vdd</span>{" "}
+                <span className="text-[#10b981]">sky130_fd_pr__pfet_01v8</span>{" "}
+                <span className="text-[#f59e0b]">W=0.55u L=0.15u</span>{"\n"}
+                <span className="text-[#ef4444]">XMNL</span>{" "}
+                <span className="text-[#94a3b8]">q qb vss vss</span>{" "}
+                <span className="text-[#00f0ff]">sky130_fd_pr__nfet_01v8</span>{" "}
+                <span className="text-[#f59e0b]">W=0.84u L=0.15u</span>{"\n\n"}
+                <span className="text-[#475569]">{`* 2T CIM Read Port`}</span>{"\n"}
+                <span className="text-[#10b981]">XMRD1</span>{" "}
+                <span className="text-[#94a3b8]">bl q mid_rd vss</span>{" "}
+                <span className="text-[#00f0ff]">sky130_fd_pr__nfet_01v8</span>{" "}
+                <span className="text-[#f59e0b]">W=0.42u L=1.0u</span>{"\n"}
+                <span className="text-[#10b981]">XMRD2</span>{" "}
+                <span className="text-[#94a3b8]">mid_rd wl vss vss</span>{" "}
+                <span className="text-[#00f0ff]">sky130_fd_pr__nfet_01v8</span>{" "}
+                <span className="text-[#f59e0b]">W=0.42u L=1.0u</span>
+              </pre>
+            </div>
+          </div>
+        </ScrollReveal>
       </div>
     </section>
   );

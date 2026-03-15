@@ -33,6 +33,10 @@
   scrollbar-color: #1e293b transparent;
 }
 
+html {
+  scroll-behavior: smooth;
+}
+
 body {
   background: var(--bg-primary);
   color: var(--text-primary);
@@ -93,7 +97,36 @@ body {
 .chapter-section {
   min-height: 100vh;
   position: relative;
-  padding: 6rem 2rem;
+  padding: 6rem 1rem;
+}
+
+@media (min-width: 640px) {
+  .chapter-section {
+    padding: 6rem 2rem;
+  }
+}
+
+/* Ensure SVGs scale on mobile */
+.neon-border {
+  overflow-x: auto;
+}
+
+/* Mobile-friendly range inputs */
+input[type="range"] {
+  -webkit-appearance: none;
+  appearance: none;
+  background: #1e293b;
+  border-radius: 999px;
+  cursor: pointer;
+}
+
+input[type="range"]::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background: currentColor;
+  cursor: pointer;
 }
 
 /* Monospace for technical values */
