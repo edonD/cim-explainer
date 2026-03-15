@@ -104,6 +104,33 @@ export default function Chapter9() {
 
         <PowerComparison />
 
+        <ScrollReveal delay={0.1}>
+          <div className="max-w-xl mx-auto mb-12">
+            <GlowCard color="#10b981">
+              <div className="text-center">
+                <div className="mono text-sm text-[#94a3b8] mb-3">Energy per Inference (MNIST digit)</div>
+                <div className="grid grid-cols-3 gap-4">
+                  <div>
+                    <div className="mono text-2xl text-[#ef4444] font-bold">~1 mJ</div>
+                    <div className="text-[10px] text-[#94a3b8]">GPU</div>
+                  </div>
+                  <div>
+                    <div className="mono text-2xl text-[#f59e0b] font-bold">~10 µJ</div>
+                    <div className="text-[10px] text-[#94a3b8]">NPU</div>
+                  </div>
+                  <div>
+                    <div className="mono text-2xl text-[#10b981] font-bold">~0.5 µJ</div>
+                    <div className="text-[10px] text-[#94a3b8]">CIM Tile</div>
+                  </div>
+                </div>
+                <div className="mono text-xs text-[#10b981] mt-3">
+                  2,000× more efficient than GPU — runs on a coin cell battery for years
+                </div>
+              </div>
+            </GlowCard>
+          </div>
+        </ScrollReveal>
+
         <ScrollReveal delay={0.2}>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-4xl mx-auto mt-12">
             {applications.map((app, i) => (

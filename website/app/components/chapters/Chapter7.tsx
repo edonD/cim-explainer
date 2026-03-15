@@ -32,6 +32,15 @@ function InferencePipeline() {
   // Simulated output scores
   const scores = useMemo(() => [0.01, 0.02, 0.01, 0.05, 0.01, 0.02, 0.03, 0.82, 0.02, 0.01], []);
 
+  // Auto-start when scrolled into view
+  const hasAutoStarted = useRef(false);
+  useEffect(() => {
+    if (isInView && !hasAutoStarted.current) {
+      hasAutoStarted.current = true;
+      setAutoPlay(true);
+    }
+  }, [isInView]);
+
   useEffect(() => {
     if (!autoPlay || !isInView) return;
     let idx = 0;

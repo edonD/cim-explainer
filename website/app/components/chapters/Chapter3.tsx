@@ -245,6 +245,14 @@ export default function Chapter3() {
                 <div className="text-xs text-[#475569] mono mt-2">
                   72M cells per postage stamp
                 </div>
+                {/* Scale bar */}
+                <div className="mt-3 flex items-center justify-center gap-2">
+                  <div className="h-1 bg-[#f59e0b] rounded-full" style={{ width: "3px" }} />
+                  <span className="text-[9px] text-[#f59e0b] mono">1.2µm</span>
+                  <span className="text-[9px] text-[#475569]">vs</span>
+                  <div className="h-1 bg-[#94a3b8] rounded-full" style={{ width: "50px" }} />
+                  <span className="text-[9px] text-[#94a3b8] mono">hair (70µm)</span>
+                </div>
               </div>
             </GlowCard>
           </div>
