@@ -1,6 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
+import ParticleField from "./anim/ParticleField";
 
 const chapters = [
   { num: 1, title: "The Problem", color: "#ef4444" },
@@ -19,6 +20,9 @@ export default function HeroSection() {
     <section className="relative min-h-screen flex flex-col items-center justify-center px-4 circuit-grid overflow-hidden">
       {/* Background gradient */}
       <div className="absolute inset-0 bg-gradient-to-b from-[#0a0f1e] via-[#0a0f1e] to-transparent" />
+
+      {/* Particle field */}
+      <ParticleField />
 
       {/* Animated circuit lines in background */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">

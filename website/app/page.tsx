@@ -11,10 +11,12 @@ import Chapter7 from "./components/chapters/Chapter7";
 import Chapter8 from "./components/chapters/Chapter8";
 import Chapter9 from "./components/chapters/Chapter9";
 import ChapterNav from "./components/ChapterNav";
+import ScrollProgress from "./components/ScrollProgress";
 
 export default function Home() {
   return (
     <main className="relative">
+      <ScrollProgress />
       <ChapterNav />
       <HeroSection />
 

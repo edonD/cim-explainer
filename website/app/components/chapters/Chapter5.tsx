@@ -124,7 +124,7 @@ function CIMArray() {
                 return (
                   <motion.div
                     key={idx}
-                    className="rounded-sm flex items-center justify-center"
+                    className="rounded-sm flex items-center justify-center border"
                     style={{
                       width: cellSize,
                       height: cellSize,
