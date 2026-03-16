@@ -1,7 +1,7 @@
 "use client";
 
 import { motion, useInView } from "framer-motion";
-import { useRef, useState, useEffect, useCallback } from "react";
+import { useRef, useState, useCallback } from "react";
 import ChapterHeader from "../ui/ChapterHeader";
 import ScrollReveal from "../ui/ScrollReveal";
 import GlowCard from "../ui/GlowCard";
@@ -16,11 +16,6 @@ function OhmsLawDemo() {
 
   return (
     <div ref={ref} className="max-w-2xl mx-auto my-12">
-      <div className="text-center mb-6">
-        <span className="mono text-2xl text-[#00f0ff]">V = I × R</span>
-      </div>
-
-      {/* Circuit visualization */}
       <div className="relative bg-[#0d1526] rounded-xl p-8 neon-border">
         <svg viewBox="0 0 400 160" className="w-full h-auto">
           {/* Wire top */}
@@ -104,9 +99,10 @@ function OhmsLawDemo() {
           <span className="mono text-sm text-[#f59e0b] w-16">{resistance}Ω</span>
         </div>
         <p className="text-center text-sm text-[#94a3b8] mt-3">
-          Change the resistance (the <span className="text-[#f59e0b]">weight</span>) →
-          the current (the <span className="text-[#10b981]">result</span>) changes.{" "}
-          <span className="text-white font-semibold">Multiplication — for free.</span>
+          Drag the slider. Watch the current change.{" "}
+          <span className="text-white font-semibold">
+            You&apos;re multiplying — with no transistors, no clock, no energy.
+          </span>
         </p>
       </div>
     </div>
@@ -134,10 +130,6 @@ function KirchhoffDemo() {
 
   return (
     <div ref={ref} className="max-w-2xl mx-auto my-12">
-      <div className="text-center mb-6">
-        <span className="mono text-2xl text-[#10b981]">ΣI = I₁ + I₂ + I₃ + I₄</span>
-      </div>
-
       <div className="relative bg-[#0d1526] rounded-xl p-8 neon-border">
         <svg viewBox="0 0 400 200" className="w-full h-auto">
           {/* Shared wire (bitline) at bottom */}
@@ -236,8 +228,8 @@ function KirchhoffDemo() {
 
         <p className="text-center text-sm text-[#94a3b8] mt-4">
           Click cells to toggle weights. Currents on the shared wire{" "}
-          <span className="text-[#10b981] font-semibold">sum automatically</span>
-          . The wire does addition — physically.
+          <span className="text-[#10b981] font-semibold">sum automatically</span>.
+          The wire is a free adder.
         </p>
       </div>
     </div>
@@ -255,52 +247,78 @@ export default function Chapter2() {
           color="#10b981"
         />
 
+        {/* ===== Part 1: The Multiplier ===== */}
         <ScrollReveal>
-          <GlowCard color="#00f0ff" className="max-w-2xl mx-auto mb-12">
-            <p className="text-lg text-center">
-              <span className="text-[#f59e0b] font-bold">Ohm&apos;s Law</span> is a
-              free multiplier.{" "}
-              <span className="text-[#10b981] font-bold">
-                Kirchhoff&apos;s Current Law
-              </span>{" "}
-              is a free adder. Combine them in a grid → free matrix
-              multiplication.
-            </p>
-          </GlowCard>
+          <p className="text-center text-xl md:text-2xl text-[#94a3b8] max-w-3xl mx-auto mb-4">
+            What if you could multiply two numbers...{" "}
+            <span className="text-[#10b981] font-bold">without any transistors switching?</span>
+          </p>
         </ScrollReveal>
 
-        <ScrollReveal>
-          <h3 className="text-2xl font-bold text-center text-[#f59e0b] mb-2">
-            Ohm&apos;s Law: V = I × R
-          </h3>
-          <p className="text-center text-[#94a3b8] mb-4">
-            A resistor multiplies. Change the resistance → change the result.
+        <ScrollReveal delay={0.1}>
+          <p className="text-center text-lg text-[#94a3b8] max-w-2xl mx-auto mb-2">
+            You already know a multiplier. A <span className="text-[#f59e0b] font-semibold">resistor</span>.
+          </p>
+          <p className="text-center mono text-2xl text-[#00f0ff] mb-4">
+            V = I × R
+          </p>
+          <p className="text-center text-[#94a3b8] max-w-xl mx-auto mb-4">
+            Change the resistance → the current changes. That&apos;s multiplication.
+            Ohm&apos;s law does it instantly, with zero energy.
           </p>
         </ScrollReveal>
 
         <OhmsLawDemo />
 
+        {/* ===== Part 2: The Adder ===== */}
         <ScrollReveal>
-          <h3 className="text-2xl font-bold text-center text-[#10b981] mb-2 mt-16">
-            Kirchhoff&apos;s Current Law: ΣI = 0
-          </h3>
-          <p className="text-center text-[#94a3b8] mb-4">
-            Currents on a shared wire sum automatically. The wire is an adder.
+          <p className="text-center text-xl md:text-2xl text-[#94a3b8] max-w-3xl mx-auto mb-4 mt-16">
+            OK, so resistors multiply. But what about{" "}
+            <span className="text-[#10b981] font-bold">addition?</span>
+          </p>
+        </ScrollReveal>
+
+        <ScrollReveal delay={0.1}>
+          <p className="text-center text-lg text-[#94a3b8] max-w-2xl mx-auto mb-2">
+            Two wires carry current. Merge them into one wire.
+            The currents <span className="text-[#10b981] font-semibold">add</span>.
+            Kirchhoff&apos;s Current Law. The wire itself is an adder.
           </p>
         </ScrollReveal>
 
         <KirchhoffDemo />
 
-        <ScrollReveal delay={0.1}>
-          <h3 className="text-2xl font-bold text-center text-[#00f0ff] mb-2 mt-16">
-            Put It Together: Matrix-Vector Multiply
-          </h3>
-          <p className="text-center text-[#94a3b8] mb-4">
-            A grid of binary weights × input activations = dot products. All in one shot.
-          </p>
+        {/* ===== Part 3: The Punchline ===== */}
+        <ScrollReveal>
+          <motion.div
+            className="text-center mt-20 mb-8"
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
+            viewport={{ once: true }}
+            transition={{ duration: 1 }}
+          >
+            <p className="text-xl md:text-2xl text-[#94a3b8] max-w-3xl mx-auto mb-6">
+              So if resistors multiply... and wires add...{" "}
+              <span className="text-[#00f0ff] font-bold">
+                what happens when you arrange resistors in a grid?
+              </span>
+            </p>
+          </motion.div>
         </ScrollReveal>
 
         <DotProductGrid />
+
+        <ScrollReveal delay={0.1}>
+          <GlowCard color="#10b981" className="max-w-2xl mx-auto">
+            <p className="text-center text-lg text-[#94a3b8]">
+              Each column sums the products from every row.
+              That&apos;s a <span className="text-[#10b981] font-bold">dot product</span>.
+              Every column does it simultaneously.
+              That&apos;s <span className="text-[#00f0ff] font-bold">matrix multiplication</span> —
+              computed by physics, in one shot, with no processor.
+            </p>
+          </GlowCard>
+        </ScrollReveal>
 
         <ScrollReveal delay={0.2}>
           <motion.p
@@ -309,9 +327,9 @@ export default function Chapter2() {
             whileInView={{ opacity: 1 }}
             viewport={{ once: true }}
           >
-            Arrange resistors in a grid →{" "}
-            <span className="text-glow-cyan text-[#00f0ff]">
-              matrix multiplication in physics
+            A grid of resistors just did matrix multiplication.{" "}
+            <span className="text-[#00f0ff] text-glow-cyan">
+              In one step. With no processor.
             </span>
           </motion.p>
         </ScrollReveal>

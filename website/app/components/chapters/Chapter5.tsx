@@ -13,7 +13,7 @@ type ArraySize = 1 | 4 | 8 | 64;
 function CIMArray() {
   const ref = useRef<HTMLDivElement>(null);
   const isInView = useInView(ref, { once: false, margin: "-50px" });
-  const [size, setSize] = useState<ArraySize>(4);
+  const [size, setSize] = useState<ArraySize>(1);
   const [phase, setPhase] = useState<"idle" | "precharge" | "compute" | "result">("idle");
   const [autoPlay, setAutoPlay] = useState(false);
 
@@ -27,11 +27,6 @@ function CIMArray() {
       }
     }
     return w;
-  }, []);
-
-  // Random input pulses (0-15)
-  const inputs = useMemo(() => {
-    return Array.from({ length: 64 }, () => Math.floor(Math.random() * 16));
   }, []);
 
   // Auto-play cycle
@@ -50,22 +45,32 @@ function CIMArray() {
   const cellSize = size <= 8 ? 40 : 8;
   const gap = size <= 8 ? 4 : 1;
 
+  // Stats for current size
+  const totalMacs = size * size;
+  const dotProducts = size;
+
   return (
     <div ref={ref} className="max-w-4xl mx-auto my-12">
       <div className="bg-[#0d1526] rounded-xl p-6 neon-border">
-        {/* Size controls */}
+        {/* Size controls with narrative labels */}
         <div className="flex flex-wrap justify-center gap-2 mb-6">
-          {([1, 4, 8, 64] as ArraySize[]).map((s) => (
+          {([
+            [1, "1×1 — One cell", "One multiplication"],
+            [4, "4×4 — Small grid", "16 MACs, 4 dot products"],
+            [8, "8×8 — Growing", "64 MACs, 8 dot products"],
+            [64, "64×64 — Full array", "4,096 MACs in ONE cycle"],
+          ] as const).map(([s, label, desc]) => (
             <button
               key={s}
-              onClick={() => { setSize(s); setPhase("idle"); }}
-              className={`px-4 py-2 rounded-lg mono text-xs border transition-all ${
+              onClick={() => { setSize(s as ArraySize); setPhase("idle"); }}
+              className={`px-3 py-2 rounded-lg text-xs border transition-all text-left ${
                 size === s
                   ? "bg-[#00f0ff]/10 border-[#00f0ff]/40 text-[#00f0ff]"
                   : "border-white/10 text-[#94a3b8] hover:border-white/20"
               }`}
             >
-              {s === 1 ? "1×1" : `${s}×${s}`}
+              <div className="mono font-bold">{label}</div>
+              <div className="text-[10px] opacity-70">{desc}</div>
             </button>
           ))}
         </div>
@@ -198,6 +203,24 @@ function CIMArray() {
           </div>
         </div>
 
+        {/* Live stats */}
+        <div className="flex justify-center gap-6 mb-4 text-center">
+          <div>
+            <div className="mono text-lg text-[#f59e0b] font-bold">
+              {totalMacs.toLocaleString()}
+            </div>
+            <div className="text-[10px] text-[#94a3b8]">multiplications</div>
+          </div>
+          <div>
+            <div className="mono text-lg text-[#10b981] font-bold">{dotProducts}</div>
+            <div className="text-[10px] text-[#94a3b8]">dot products</div>
+          </div>
+          <div>
+            <div className="mono text-lg text-[#a855f7] font-bold">1</div>
+            <div className="text-[10px] text-[#94a3b8]">clock cycle</div>
+          </div>
+        </div>
+
         {/* Phase controls */}
         <div className="flex flex-wrap justify-center gap-2 mb-4">
           {([
@@ -226,7 +249,7 @@ function CIMArray() {
                 : "border-white/10 text-[#94a3b8] hover:border-white/20"
             }`}
           >
-            {autoPlay ? "⏸ Stop" : "▶ Auto"}
+            {autoPlay ? "Stop" : "Auto"}
           </button>
         </div>
 
@@ -234,20 +257,20 @@ function CIMArray() {
         <div className="text-center text-sm text-[#94a3b8]">
           <AnimatePresence mode="wait">
             <motion.p
-              key={phase}
+              key={`${phase}-${size}`}
               initial={{ opacity: 0, y: 10 }}
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: -10 }}
             >
-              {phase === "idle" && "Select a phase to see the compute cycle."}
+              {phase === "idle" && "Select a phase to see the compute cycle in action."}
               {phase === "precharge" && (
-                <>All bitlines pulled to <span className="text-[#00f0ff] mono">VDD = 1.8V</span>. PMOS precharge transistors charge the bitline capacitors.</>
+                <>All {size} bitlines pulled to <span className="text-[#00f0ff] mono">VDD = 1.8V</span>. Clean slate.</>
               )}
               {phase === "compute" && (
-                <>{size}×{size === 64 ? "64" : size} PWM pulses arrive on wordlines. Cells with <span className="text-[#00f0ff]">W=1</span> discharge their bitline. Currents sum by KCL.</>
+                <>{size} PWM pulses arrive on wordlines simultaneously. Cells with <span className="text-[#00f0ff]">W=1</span> discharge their bitline. Currents sum by Kirchhoff&apos;s Law.</>
               )}
               {phase === "result" && (
-                <><span className="text-[#10b981] font-bold">{size}</span> analog voltages on {size} bitlines = <span className="text-[#10b981] font-bold">{size} dot products</span> computed in ONE shot.</>
+                <><span className="text-[#10b981] font-bold">{size}</span> analog voltages = <span className="text-[#10b981] font-bold">{size} dot products</span> computed in <span className="text-white font-bold">one shot</span>.</>
               )}
             </motion.p>
           </AnimatePresence>
@@ -264,17 +287,21 @@ export default function Chapter5() {
         <ChapterHeader
           number={5}
           title="The Array"
-          subtitle="Where magic happens — 64×64 simultaneous multiply-accumulates"
+          subtitle="Now put 4,096 of them together"
           color="#10b981"
         />
 
+        {/* Build the dramatic progression */}
         <ScrollReveal>
-          <p className="text-center text-lg text-[#94a3b8] max-w-3xl mx-auto mb-4">
-            Tile {CHIP.array_rows}×{CHIP.array_cols} = {CHIP.array_rows * CHIP.array_cols} bitcells into a grid.
-            Each row shares a wordline (input). Each column shares a bitline (output).
-            The result is a{" "}
-            <span className="text-[#10b981] font-bold">matrix-vector multiplier</span> that
-            computes in physics.
+          <p className="text-center text-xl md:text-2xl text-[#94a3b8] max-w-3xl mx-auto mb-4">
+            One cell does one multiplication. But what if we tile them into a grid?
+          </p>
+        </ScrollReveal>
+
+        <ScrollReveal delay={0.1}>
+          <p className="text-center text-lg text-[#94a3b8] max-w-3xl mx-auto mb-2">
+            Start small. Click through the sizes —{" "}
+            <span className="text-[#10b981] font-semibold">watch the power of parallelism</span>.
           </p>
         </ScrollReveal>
 
@@ -361,7 +388,7 @@ export default function Chapter5() {
             whileInView={{ opacity: 1 }}
             viewport={{ once: true }}
           >
-            64 multiply-accumulate operations. One cycle.{" "}
+            4,096 multiply-accumulate operations. One cycle.{" "}
             <span className="text-[#00f0ff] text-glow-cyan">Zero data movement.</span>
           </motion.p>
           <div className="mt-6 flex justify-center gap-8 flex-wrap">

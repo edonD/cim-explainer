@@ -13,6 +13,7 @@ const chapters = [
   { num: 7, title: "Neural Inference", color: "#00f0ff" },
   { num: 8, title: "The Full Chip", color: "#00f0ff" },
   { num: 9, title: "Why It Matters", color: "#10b981" },
+  { num: 10, title: "CIM Is Real", color: "#00f0ff" },
 ];
 
 export default function HeroSection() {

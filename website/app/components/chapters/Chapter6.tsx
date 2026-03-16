@@ -243,13 +243,18 @@ export default function Chapter6() {
         />
 
         <ScrollReveal>
+          <p className="text-center text-xl md:text-2xl text-[#94a3b8] max-w-3xl mx-auto mb-4">
+            The array produced 64 analog voltages. But the rest of the system speaks{" "}
+            <span className="text-[#f59e0b] font-bold">digital</span>. How do we convert?
+          </p>
+        </ScrollReveal>
+
+        <ScrollReveal delay={0.1}>
           <p className="text-center text-lg text-[#94a3b8] max-w-3xl mx-auto mb-8">
-            The array produces analog voltages. We need digital numbers. A{" "}
-            <span className="text-[#f59e0b] font-bold">
-              Successive Approximation Register (SAR) ADC
-            </span>{" "}
-            performs a binary search on the voltage — 6 comparisons for 6 bits
-            of precision.
+            Binary search. A{" "}
+            <span className="text-[#f59e0b] font-bold">SAR ADC</span>{" "}
+            asks &quot;is the voltage above half?&quot; then narrows down —
+            6 comparisons yield 6 bits of precision.
           </p>
         </ScrollReveal>
 

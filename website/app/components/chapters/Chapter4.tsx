@@ -156,10 +156,7 @@ function PWMWaveforms() {
         </div>
 
         <p className="text-center text-sm text-[#94a3b8] mt-4">
-          Longer pulse = more time for current to flow = larger dot product contribution.{" "}
-          <span className="text-[#a855f7] font-semibold">
-            The pulse width IS the input activation value.
-          </span>
+          Bigger number → longer pulse → more time for current to flow → larger dot product contribution.
         </p>
       </div>
     </div>
@@ -177,16 +174,49 @@ export default function Chapter4() {
           color="#a855f7"
         />
 
+        {/* The question first */}
         <ScrollReveal>
+          <p className="text-center text-xl md:text-2xl text-[#94a3b8] max-w-3xl mx-auto mb-4">
+            Chapter 2 showed analog multiplication. Chapter 3 showed
+            binary weight storage. So how do we feed in a{" "}
+            <span className="text-[#a855f7] font-bold">multi-bit input value</span>?
+          </p>
+        </ScrollReveal>
+
+        {/* The reveal */}
+        <ScrollReveal delay={0.2}>
+          <motion.p
+            className="text-center text-3xl md:text-4xl font-bold text-[#a855f7] my-8"
+            initial={{ opacity: 0, scale: 0.9 }}
+            whileInView={{ opacity: 1, scale: 1 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.8, delay: 0.3 }}
+          >
+            We encode the input as <span className="text-glow-purple">TIME</span>.
+          </motion.p>
+        </ScrollReveal>
+
+        <ScrollReveal delay={0.1}>
           <p className="text-center text-lg text-[#94a3b8] max-w-3xl mx-auto mb-8">
-            How do we encode input values for analog computation? Using{" "}
-            <span className="text-[#a855f7] font-bold">Pulse Width Modulation</span>.
-            A 4-bit digital code becomes a pulse whose width is proportional to
-            the input value.
+            A 4-bit number becomes a pulse whose width is proportional to its value.
+            The number 5 becomes a pulse that&apos;s ON for 5 units of time.
+            15 → long pulse. 1 → short pulse. 0 → no pulse at all.
           </p>
         </ScrollReveal>
 
         <PWMWaveforms />
+
+        {/* Connect it back */}
+        <ScrollReveal delay={0.1}>
+          <GlowCard color="#a855f7" className="max-w-2xl mx-auto">
+            <p className="text-center text-[#94a3b8]">
+              The <span className="text-[#a855f7] font-bold">pulse width</span> IS the input value.
+              The cell&apos;s <span className="text-[#00f0ff] font-bold">stored bit</span> IS the weight.
+              Current × time = the product.{" "}
+              <span className="text-white font-semibold">Physics does the rest.</span>
+            </p>
+          </GlowCard>
+        </ScrollReveal>
 
         <ScrollReveal delay={0.2}>
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4 max-w-3xl mx-auto mt-8">

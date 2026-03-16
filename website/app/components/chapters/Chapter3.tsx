@@ -195,15 +195,24 @@ export default function Chapter3() {
         <ChapterHeader
           number={3}
           title="The SRAM Bitcell"
-          subtitle="An 8-transistor memory cell that computes — explored in depth"
+          subtitle="How do you make a resistor that remembers?"
           color="#00f0ff"
         />
 
         <ScrollReveal>
+          <p className="text-center text-xl md:text-2xl text-[#94a3b8] max-w-3xl mx-auto mb-4">
+            The grid from Chapter 2 needs programmable resistors — resistors whose value
+            we can <span className="text-[#00f0ff] font-bold">set</span> and that{" "}
+            <span className="text-[#00f0ff] font-bold">stay set</span>. That&apos;s what
+            the memory cell is.
+          </p>
+        </ScrollReveal>
+
+        <ScrollReveal delay={0.1}>
           <p className="text-center text-lg text-[#94a3b8] max-w-3xl mx-auto mb-4">
-            A standard 6T SRAM stores one bit using cross-coupled inverters. For CIM, we add{" "}
+            A standard 6T SRAM stores one bit. For CIM, we add{" "}
             <span className="text-[#10b981] font-bold">2 extra transistors</span> — a
-            decoupled read port that lets us compute without disturbing the stored data.
+            decoupled read port that lets the cell compute without disturbing the stored value.
           </p>
         </ScrollReveal>
 

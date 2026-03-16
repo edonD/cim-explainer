@@ -131,13 +131,14 @@ export default function Chapter8() {
         <ChapterHeader
           number={8}
           title="The Full Chip"
-          subtitle="SKY130 SRAM-CIM Inference Tile"
+          subtitle="All the pieces, assembled"
           color="#00f0ff"
         />
 
         <ScrollReveal>
-          <p className="text-center text-lg text-[#94a3b8] max-w-3xl mx-auto mb-8">
-            All the pieces assembled into a single compute tile. Built on{" "}
+          <p className="text-center text-xl md:text-2xl text-[#94a3b8] max-w-3xl mx-auto mb-4">
+            PWM drivers + 64×64 SRAM array + 64 ADCs + control logic.
+            One compute tile, built on{" "}
             <span className="text-[#00f0ff] font-bold">{CHIP.technology}</span> —
             a real, manufacturable process.
           </p>

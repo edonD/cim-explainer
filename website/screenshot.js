@@ -19,7 +19,7 @@ async function main() {
 
   // Full page desktop screenshot
   await page.setViewport({ width: 1920, height: 1080 });
-  await page.goto(BASE_URL, { waitUntil: "networkidle0", timeout: 30000 });
+  await page.goto(BASE_URL, { waitUntil: "domcontentloaded", timeout: 60000 });
   await page.waitForSelector("main", { timeout: 10000 });
   await new Promise((r) => setTimeout(r, 2000)); // wait for animations
 
@@ -38,7 +38,7 @@ async function main() {
 
   // Mobile
   await page.setViewport({ width: 390, height: 844 });
-  await page.goto(BASE_URL, { waitUntil: "networkidle0", timeout: 30000 });
+  await page.goto(BASE_URL, { waitUntil: "domcontentloaded", timeout: 60000 });
   await new Promise((r) => setTimeout(r, 2000));
   await page.screenshot({
     path: path.join(OUT_DIR, "full-mobile.png"),
@@ -48,7 +48,7 @@ async function main() {
 
   // Chapter screenshots (desktop)
   await page.setViewport({ width: 1920, height: 1080 });
-  for (let ch = 1; ch <= 9; ch++) {
+  for (let ch = 1; ch <= 10; ch++) {
     await page.goto(`${BASE_URL}#chapter-${ch}`, {
       waitUntil: "networkidle0",
       timeout: 30000,

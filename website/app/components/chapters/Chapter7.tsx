@@ -243,19 +243,24 @@ export default function Chapter7() {
         <ChapterHeader
           number={7}
           title="Neural Network Inference"
-          subtitle="A neural network running entirely inside memory"
+          subtitle="Everything connects. This is the finale."
           color="#00f0ff"
         />
 
         <ScrollReveal>
+          <p className="text-center text-xl md:text-2xl text-[#94a3b8] max-w-3xl mx-auto mb-4">
+            A handwritten &quot;7&quot; enters the chip. Watch what happens.
+          </p>
+        </ScrollReveal>
+
+        <ScrollReveal delay={0.1}>
           <p className="text-center text-lg text-[#94a3b8] max-w-3xl mx-auto mb-8">
-            Now put it all together. A handwritten digit goes in. Pixel values
-            become PWM pulses. The CIM array computes dot products. ADCs
-            digitize. Activation functions fire. The answer comes out —{" "}
+            Pixel values become PWM pulses (Chapter 4). Pulses hit the array where
+            weights are stored (Chapter 3 + 5). Physics computes 64 dot products in
+            one shot (Chapter 2 + 5). ADCs digitize (Chapter 6). The answer comes out —{" "}
             <span className="text-[#10b981] font-bold">
               the weights never moved
-            </span>
-            .
+            </span>.
           </p>
         </ScrollReveal>
 
